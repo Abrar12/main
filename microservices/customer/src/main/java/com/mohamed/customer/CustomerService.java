@@ -22,11 +22,11 @@ public class CustomerService {
 
         customerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = template.getForObject(
-                "http://localhost:8081/api/v1/fraud-check/{customerId}" , FraudCheckResponse.class , customer.getId()
+        boolean isFraud = template.getForObject(
+                "http://localhost:8081/api/v1/fraud-check/{customerId}" , Boolean.class , customer.getId()
         );
 
-        //System.out.println(fraudCheckResponse.isFraud());
+        System.out.println("Hiiii " +isFraud);
 
     }
 }
